@@ -1,0 +1,6 @@
+.metadata/*
+jasper-sample/.classpath
+jasper-sample/.settings/
+jasper-sample/.project
+jasper-sample/target/*
+jasper-sample/src/main/jasper/
