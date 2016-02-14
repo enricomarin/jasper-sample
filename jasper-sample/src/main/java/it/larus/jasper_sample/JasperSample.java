@@ -1,20 +1,12 @@
 package it.larus.jasper_sample;
 
-import it.larus.jasper_sample.bean.FieldBean;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import it.larus.jasper_sample.bean.FieldBean;
+import it.larus.jasper_sample.builder.SampleReportBuilder;
 import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperExportManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
-import net.sf.jasperreports.engine.design.JasperDesign;
-import net.sf.jasperreports.engine.xml.JRXmlLoader;
 
 /**
  * Hello world!
@@ -48,25 +40,23 @@ public class JasperSample
         fields.add(new FieldBean("Prova 9",  "15.10", "1234567890128", "A643B456"));
         fields.add(new FieldBean("Prova 10", "10.00", "1234567890128", "A123C456"));
         
-        JasperDesign jasperDesign = JRXmlLoader.load(jasperFileSource);
+        String nomeReport = "report.pdf";
         
-        JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
+        SampleReportBuilder.buildPdf(jasperFileSource, fields, nomeReport);
         
-        JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(fields);
-        
-        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, jrDataSource);
-        
-        JasperExportManager.exportReportToPdfFile(jasperPrint, "report.pdf");
         
         System.out.println("Pdf file successfully generated.");
         
+      }
+      catch (IllegalArgumentException e)
+      {
+    	System.out.println(e.getMessage());
       }
       catch (JRException e)
       {
         System.out.println("Error during the generation of PDF file.\n");
         e.printStackTrace();
-      }
-      
+      }      
     }
   }
 }
