@@ -1,2 +1,4 @@
 language: java
+before_script: cd jasper-sample
 script: mvn clean verify
+after_script: cd ..
