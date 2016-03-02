@@ -1,4 +1,8 @@
 language: java
+jdk: 
+  - openjdk6
+  - oraclejdk7
+  - oraclejdk8
 before_script: cd jasper-sample
-script: "mvn clean verify && mvn clean test"
+script: mvn clean verify
 after_script: cd ..
